@@ -1,0 +1,17 @@
+{
+	"name": "SqlTestDb",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "SecretsVault",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "DbConnectionString"
+			}
+		}
+	}
+}
