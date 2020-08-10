@@ -1,0 +1,39 @@
+{
+	"name": "OpResources",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlTestDb",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "alias",
+				"type": "varchar"
+			},
+			{
+				"name": "resourcestatus",
+				"type": "char"
+			},
+			{
+				"name": "resourcetype",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "countrycode",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "op_resources"
+		}
+	}
+}
