@@ -29,6 +29,10 @@
 			{
 				"name": "countrycode",
 				"type": "varchar"
+			},
+			{
+				"name": "PersonnelNumber",
+				"type": "varchar"
 			}
 		],
 		"typeProperties": {
