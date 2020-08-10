@@ -22,7 +22,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "VacationStaging",
+						"referenceName": "vac01final",
 						"type": "DatasetReference"
 					},
 					"name": "saveResult"
@@ -42,7 +42,7 @@
 					"name": "InnerJoin"
 				}
 			],
-			"script": "source(output(\n\t\tid as integer,\n\t\talias as string,\n\t\tresourcestatus as string,\n\t\tresourcetype as integer,\n\t\tcountrycode as string,\n\t\tPersonnelNumber as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> oneprofileResources\nsource(output(\n\t\tid as integer,\n\t\tpersonnelnumber as string,\n\t\tfromdate as timestamp,\n\t\ttodate as timestamp\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> vac01staging\nCountryAndStatusFilter select(mapColumn(\n\t\talias,\n\t\tPersonnelNumber\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> RemoveUnnecessaryColumns\noneprofileResources filter(resourcestatus!= '3' && resourcestatus!='Y') ~> CountryAndStatusFilter\nvac01staging select(mapColumn(\n\t\tpersonnelnumber,\n\t\tfromdate,\n\t\ttodate\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> RemoveUnnecessaryColumnVacation\nRemoveUnnecessaryColumns, RemoveUnnecessaryColumnVacation join(RemoveUnnecessaryColumns@PersonnelNumber == RemoveUnnecessaryColumnVacation@personnelnumber,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> InnerJoin\nInnerJoin sink(input(\n\t\tid as integer,\n\t\tpersonnelnumber as string,\n\t\tfromdate as timestamp,\n\t\ttodate as timestamp\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> saveResult"
+			"script": "source(output(\n\t\tid as integer,\n\t\talias as string,\n\t\tresourcestatus as string,\n\t\tresourcetype as integer,\n\t\tcountrycode as string,\n\t\tPersonnelNumber as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> oneprofileResources\nsource(output(\n\t\tid as integer,\n\t\tpersonnelnumber as string,\n\t\tfromdate as timestamp,\n\t\ttodate as timestamp\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> vac01staging\nCountryAndStatusFilter select(mapColumn(\n\t\talias,\n\t\tPersonnelNumber\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> RemoveUnnecessaryColumns\noneprofileResources filter(resourcestatus!= '3' && resourcestatus!='Y') ~> CountryAndStatusFilter\nvac01staging select(mapColumn(\n\t\tpersonnelnumber,\n\t\tfromdate,\n\t\ttodate\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> RemoveUnnecessaryColumnVacation\nRemoveUnnecessaryColumns, RemoveUnnecessaryColumnVacation join(RemoveUnnecessaryColumns@PersonnelNumber == RemoveUnnecessaryColumnVacation@personnelnumber,\n\tjoinType:'inner',\n\tbroadcast: 'auto')~> InnerJoin\nInnerJoin sink(input(\n\t\tid as integer,\n\t\talias as string,\n\t\tfromdate as timestamp,\n\t\ttodate as timestamp\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tdeletable:false,\n\tinsertable:true,\n\tupdateable:false,\n\tupsertable:false,\n\tformat: 'table',\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> saveResult"
 		}
 	}
 }
