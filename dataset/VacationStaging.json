@@ -1,0 +1,38 @@
+{
+	"name": "VacationStaging",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlTestDb",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "alias",
+				"type": "varchar"
+			},
+			{
+				"name": "fromdate",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "todate",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "vac01"
+		}
+	}
+}
