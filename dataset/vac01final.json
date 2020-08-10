@@ -1,5 +1,5 @@
 {
-	"name": "VacationStaging",
+	"name": "vac01final",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "SqlTestDb",
@@ -14,7 +14,7 @@
 				"precision": 10
 			},
 			{
-				"name": "personnelnumber",
+				"name": "alias",
 				"type": "varchar"
 			},
 			{
@@ -32,7 +32,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "vac01"
+			"table": "vac01_final"
 		}
 	}
 }
